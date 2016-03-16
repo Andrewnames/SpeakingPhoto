@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:AppXF.Services;assembly=AppXF"
+             xmlns:telerik="clr-namespace:Telerik.XamarinForms.DataControls;assembly=Telerik.XamarinForms.DataControls"
+             xmlns:listView="clr-namespace:Telerik.XamarinForms.DataControls.ListView;assembly=Telerik.XamarinForms.DataControls"
+             x:Class="AppXF.Views.FoodTab"
+             xmlns:local="clr-namespace:AppXF.Views;assembly=AppXF"
+            xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+BackgroundColor="#5FBE5F"
+             Title="Food" Icon="food.png"
+              
+             >
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <services:ImageNameConverter x:Key="imageConverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <telerik:RadListView x:Name="plateGrid"  ItemTapped="PlateGridTapped"  HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" >
+  <!--<telerik:RadListView x:Name="plateGrid"  ItemTapped="PlateGridTapped"  HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#E92790EE" >-->
+
+    <telerik:RadListView.LayoutDefinition>
+      <listView:ListViewGridLayout VerticalItemSpacing="1" Orientation="Horizontal"    HorizontalItemSpacing="1" >
+
+        <listView:ListViewGridLayout.SpanCount>
+          <OnIdiom x:TypeArguments="x:Int32">
+            <OnIdiom.Phone>3</OnIdiom.Phone>
+            <OnIdiom.Tablet>6</OnIdiom.Tablet>
+          </OnIdiom>
+        </listView:ListViewGridLayout.SpanCount>
+
+      </listView:ListViewGridLayout>
+      
+    </telerik:RadListView.LayoutDefinition>
+
+    <telerik:RadListView.ItemStyle>
+      <listView:ListViewItemStyle BackgroundColor="Transparent" BorderLocation="None"/>
+    </telerik:RadListView.ItemStyle>
+
+    <!--<telerik:RadListView.SelectedItemStyle>
+      <listView:ListViewItemStyle BackgroundColor="Transparent"  BorderLocation="All"/>
+    </telerik:RadListView.SelectedItemStyle>-->
+
+
+    <telerik:RadListView.PressedItemStyle>
+      <listView:ListViewItemStyle BackgroundColor="#478E47" BorderLocation="Bottom"  BorderWidth="1"/>
+    </telerik:RadListView.PressedItemStyle>
+
+    <telerik:RadListView.ItemTemplate >
+      <DataTemplate >
+        <listView:ListViewTemplateCell >
+          <listView:ListViewTemplateCell.View >
+            <forms:CachedImage Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"
+                          
+                           DownsampleToViewSize="true"
+                                    LoadingPlaceholder="Loading"
+                                   TransparencyEnabled="False"
+                           Source = "{Binding ImagePath, Converter={StaticResource imageConverter}}">
+              <forms:CachedImage.WidthRequest>
+                <OnIdiom x:TypeArguments="x:Double">
+                  <OnIdiom.Phone>150</OnIdiom.Phone>
+                  <OnIdiom.Tablet>200</OnIdiom.Tablet>
+                </OnIdiom>
+              </forms:CachedImage.WidthRequest>
+              <forms:CachedImage.HeightRequest>
+                <OnIdiom x:TypeArguments="x:Double">
+                  <OnIdiom.Phone>150</OnIdiom.Phone>
+                  <OnIdiom.Tablet>200</OnIdiom.Tablet>
+                </OnIdiom>
+              </forms:CachedImage.HeightRequest>
+            </forms:CachedImage>
+               
+          </listView:ListViewTemplateCell.View>
+        </listView:ListViewTemplateCell>
+      </DataTemplate>
+    </telerik:RadListView.ItemTemplate>
+
+  </telerik:RadListView>
+
+
+</ContentPage>

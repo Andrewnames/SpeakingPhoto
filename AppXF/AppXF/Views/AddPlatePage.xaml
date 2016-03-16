@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services ="clr-namespace:AppXF.Services;assembly=AppXF"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="AppXF.Views.AddPlatePage"
+  
+  BackgroundColor="#1FAECE"
+  >
+  
+  <ScrollView>
+  <StackLayout x:Name="stackLayout" Spacing="10" Padding="10" Orientation="Vertical">
+
+    <forms:CachedImage x:Name ="newPlateImage" Source="shutter.png" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"
+                          WidthRequest="100" HeightRequest="100"
+                          DownsampleToViewSize="true"/>
+    <StackLayout Orientation="Horizontal" Spacing="40" HorizontalOptions="CenterAndExpand">
+      <Button x:Name="chooseBtn" Clicked="ChoosePhoto" Text="Photo Library" BackgroundColor="#5FBE5F" TextColor="White"/>
+      <Button x:Name="picBtn" Clicked="TakePhoto" Text="Take Photo"  BackgroundColor="#CB3A33" TextColor="White"/>
+    </StackLayout>
+
+    <Entry x:Name="itemNameEntry"  Placeholder="Print name"/>  
+    
+    <Picker x:Name="categoryPicker"  Title="Choose Category" />
+
+
+    <Label  Text=" Voice"  HorizontalOptions="Center"  LineBreakMode="NoWrap" />
+    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+
+
+      <Label  x:Name="synthLabel" Text=" Synthesized" IsEnabled="True" HorizontalOptions="Start" TextColor="Lime" LineBreakMode="NoWrap"/>
+      <Switch x:Name="voiceSwitch" Toggled="VoiceSwitch_OnToggled" HorizontalOptions="Center"/>
+      <Label x:Name="voiceLabel" Text=" Recorded" TextColor="White"  IsEnabled="False" HorizontalOptions="End" LineBreakMode="NoWrap"/>
+
+
+
+    </StackLayout>
+
+
+    <Button x:Name="recordButton"  Text="Record Voice" BackgroundColor="#CB3A33" Clicked="Record_Button_OnClicked"  IsEnabled="False" >
+     <Button.TextColor>
+      <OnPlatform x:TypeArguments="Color" iOS="White" Android="White"/>
+     </Button.TextColor>
+    </Button>
+ 
+    <Button x:Name="finishBtn" Text="Finish" BackgroundColor="#91E2F4" Clicked="FinishRequested" VerticalOptions="End" >
+      <Button.TextColor>
+        <OnPlatform x:TypeArguments="Color" iOS="Black" Android="White"/>
+      </Button.TextColor>
+    </Button>
+  </StackLayout>
+  </ScrollView>
+  
+</ContentPage>
