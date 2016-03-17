@@ -62,6 +62,11 @@ namespace AppXF.Views
 
             
         }
+        /// <summary>
+        /// On pic click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void PlateGridTapped(object sender, ItemTapEventArgs e)
         {
