@@ -99,6 +99,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FolderChecker_IOS.cs" />
+    <Compile Include="LaunchScreen.cs" />
+    <Compile Include="LaunchScreen.designer.cs">
+      <DependentUpon>LaunchScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="PictureTaker_IOS.cs" />

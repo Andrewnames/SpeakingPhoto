@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using AppXF.Data;
+using AppXF.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.FormsBook.Toolkit;
@@ -181,34 +183,33 @@ namespace AppXF.Views
         private async void FinishRequested(object sender, EventArgs e)
         {
 
-            //if (string.IsNullOrEmpty(ImageLocation))
-            //{
-            //    await DisplayAlert("", "You forgot to make/choose photo", "Ok");
-            //}
-            //else if (string.IsNullOrEmpty(itemNameEntry.Text))
-            //{
-            //    await DisplayAlert("", "You forgot to print the name", "Ok");
-            //}
-            //else
-            //{
-            //    DataBaseInstance.DatabaseInstance.SavePlate(new DataPlate()
-            //    {
-            //        IsSynth = !recordButton.IsEnabled,
-            //        ItemName = itemNameEntry.Text,
-            //        ImagePath = ImageLocation,
-            //        AudioPath = SoundLocation,
-            //        Category = category ?? "Food"
-            //    });
-            foreach (View view in stackLayout.Children)
+            if (string.IsNullOrEmpty(ImageLocation))
             {
-                await Task.WhenAny(view.FadeTo(0, 100, Easing.SinIn), Task.Delay(20));
-                await Task.WhenAny(view.ScaleTo(0, 100, Easing.SinIn), Task.Delay(20));
+                await DisplayAlert("", "You forgot to make/choose photo", "Ok");
             }
-            // await Navigation.PopAsync();
-            await Navigation.PushModalAsync(new MainPage());
+            else if (string.IsNullOrEmpty(itemNameEntry.Text))
+            {
+                await DisplayAlert("", "You forgot to print the name", "Ok");
+            }
+            else
+            {
+                DataBaseInstance.DatabaseInstance.SavePlate(new DataPlate()
+                {
+                    IsSynth = !recordButton.IsEnabled,
+                    ItemName = itemNameEntry.Text,
+                    ImagePath = ImageLocation,
+                    AudioPath = SoundLocation,
+                    Category = category ?? "Food"
+                });
+                foreach (View view in stackLayout.Children)
+                {
+                    await Task.WhenAny(view.FadeTo(0, 100, Easing.SinIn), Task.Delay(20));
+                    await Task.WhenAny(view.ScaleTo(0, 100, Easing.SinIn), Task.Delay(20));
+                }
+                await Navigation.PushModalAsync(new MainPage());
 
-            Unhandler();
-            // }
+                Unhandler();
+            }
         }
 
         private void Unhandler()
